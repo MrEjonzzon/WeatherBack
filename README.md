@@ -2,6 +2,9 @@
 
 WeatherBack is a simple web app that lets you look up historical weather data for any location and date, going as far back as 1950. Just enter a city name or coordinates along with a date, and see what the weather was like on that day.
 
+![image](https://github.com/user-attachments/assets/5a7028a5-0242-416d-b524-ddcfa6bb6538)
+
+
 ## Features
 
 - Check daily weather conditions back to 1950
