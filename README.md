@@ -27,15 +27,54 @@ WeatherBack is a simple web app that lets you look up historical weather data fo
    ```
 
 ### Docker
-1. Build image with `build.sh`
-2. Run container
-```
-docker run -p 5001:5000 --env-file .env weatherback
-```
 
-### 
+The Dockerfile and app source code are located in the `docker/` folder.
+
+1. Move to the docker folder:
+   ```
+   cd docker
+   ```
+
+2. Build and push the image (requires Docker login):
+   ```
+   ./build.sh
+   ```
+
+3. Run the container locally:
+   ```
+   docker run -p 5000:5000 --env-file ../.env weatherback
+   ```
+
+---
 
 ### Kubernetes
+
+Kubernetes deployment files are located in the `kubernetes/` folder.
+
+#### Deploy to Minikube
+
+1. Start Minikube if not already running:
+   ```
+   minikube start
+   ```
+
+2. Apply the secrets, deployment, and service:
+   ```
+   kubectl apply -f kubernetes/secrets/api_key_secret.yaml
+   kubectl apply -f kubernetes/weatherback_deployment.yaml
+   kubectl apply -f kubernetes/weatherback_service.yaml
+   ```
+
+3. Expose the app:
+   ```
+   minikube service weatherback-service
+   ```
+
+Or manually get the Minikube IP and access the app:
+   ```
+   minikube ip
+   # Use http://<minikube-ip>:30001 in your browser
+   ```
 
 ## Credits
 

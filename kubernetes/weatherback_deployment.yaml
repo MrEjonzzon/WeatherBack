@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: weatherback
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: weatherback
+  template:
+    metadata:
+      labels:
+        app: weatherback
+    spec:
+      containers:
+        - name: weatherback
+          image: mrejonzzon/weatherback:latest
+          ports:
+            - containerPort: 5000
+          env:
+            - name: API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: weatherback-api-key
+                  key: API_KEY
