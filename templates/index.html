@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block content %}
+{% if error %}
+  <div class="alert alert-warning" role="alert">
+    {{ error }}
+  </div>
+{% endif %}
+<form action="/" method="post">
+  <label for="location">City or Coordinates:</label><br>
+  <input type="text" id="location" name="location" placeholder="e.g., Uppsala or 59.8586,17.6389" value="{{ location or '' }}" required><br><br>
+
+  <label for="date">Date</label><br>
+  <input type="date" id="date" name="date" value="{{ date or '' }}"  placeholder="e.g., 2020-01-01" required><br><br>
+
+  <input type="submit" value="Check Weather">
+</form>
+
+{% if weather %}
+  <div class="weather-result">
+    <hr>
+    <h2>Weather for {{ weather.resolvedAddress }} on {{ weather.days[0].datetime }}</h2>
+    <ul class="list-unstyled">
+      <li>Temperature: {{ weather.days[0].temp }}°C</li>
+      <li>Feels like: {{ weather.days[0].feelslike }}°C</li>
+      <li>Conditions: {{ weather.days[0].conditions }}</li>
+      <li>Wind: {{ weather.days[0].windspeed }} km/h</li>
+      <li>Rainfall: {{ weather.days[0].precip }} mm</li>
+    </ul>
+  </div>
+{% endif %}
+<!-- Flatpickr JS and CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script>
+  flatpickr("#date", {
+    dateFormat: "Y-m-d"
+  });
+</script>
+{% endblock %}
